@@ -1,2 +1,2 @@
 # munix
-Record the scripts for linux administation
+Record the scripts for linux administration
