@@ -8,8 +8,9 @@ system_time()
 	SYSTEM_TOTAL_TIME=`cat /proc/uptime | awk '{print $1}'`
 	SYSTEM_IDLE_TIME=`cat /proc/uptime | awk '{print $2}'`
 	SYSTEM_START_TIME=`date -d "$(awk '{print $1}' /proc/uptime) seconds ago" +"%F %T"`
-	SYSTEM_USAGE_PERCENT=`awk 'BEGIN {print $SYSTEM_IDLE_TIME/$SYSTEM_TOTAL__TIME*100}'`
-
+	SYSTEM_USAGE_PERCENT=`echo "scale=3;$SYSTEM_IDLE_TIME/$SYSTEM_TOTAL_TIME*100" | bc`
+        
+	echo "Time Now:"`date +"%F %T"`
 	echo "System Uptime: $UPTIME"
 	echo "System Start Time: $SYSTEM_START_TIME"
 	echo "System utilization: $SYSTEM_USAGE_PERCENT%"
