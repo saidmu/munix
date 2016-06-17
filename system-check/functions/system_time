@@ -1,8 +1,17 @@
 #!/bin/bash
 
+# /proc/uptime 的两个时间均以秒为单位，第一个代表系统到目前位置的启动时间，第二个代表系统空闲的时间，通过这两个参数可以计算出系统的使用率。
+
 system_time()
 {
-  echo "Uptime:" `uptime | awk -F "," '{print $1}'| awk -F "up" '{print $2}'`
-  echo
-}
+	UPTIME=`uptime | awk -F "," '{print $1}' | awk -F "up " '{print $2}'`
+	SYSTEM_TOTAL_TIME=`cat /proc/uptime | awk '{print $1}'`
+	SYSTEM_IDLE_TIME=`cat /proc/uptime | awk '{print $2}'`
+	SYSTEM_START_TIME=`date -d "$(awk '{print $1}' /proc/uptime) seconds ago" +"%F %T"`
+	SYSTEM_USAGE_PERCENT=`awk 'BEGIN {print $SYSTEM_IDLE_TIME/$SYSTEM_TOTAL__TIME*100}'`
 
+	echo "System Uptime: $UPTIME"
+	echo "System Start Time: $SYSTEM_START_TIME"
+	echo "System utilization: $SYSTEM_USAGE_PERCENT%"
+	echo
+}
