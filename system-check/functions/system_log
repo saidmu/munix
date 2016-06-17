@@ -1,0 +1,15 @@
+#!/bin/bash
+
+system_log()
+{
+  echo "Kernel Log Errors: "`dmesg | grep Error | wc -l`
+  echo "Kernel Log Errors: "`dmesg | grep Error`
+  echo "System Log Errors: "`cat /var/log/messages | grep Error | wc -l`
+  echo "System Log Errors: "`cat /var/log/messages | grep Error`
+  echo "Secure Log Problems: "`cat /var/log/secure | grep "authentication failure" | wc -l`
+  echo "Secure Log Problems: "`cat /var/log/secure | grep "authentication failure"`
+  echo "Boot Log Problems: "`cat /var/log/boot.log | grep -E "failure|error" | wc -l`
+  echo "Boot Log Problems: "`cat /var/log/boot.log | grep -E "failure|error"`
+  echo
+}
+

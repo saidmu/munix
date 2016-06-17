@@ -1,0 +1,22 @@
+
+get_network_ip()
+{
+  network_dev=`cat /proc/net/dev | sed '1,2d' | awk -F ":" '{print $1}' | sed '/lo/d'`
+  for dev in $network_dev
+  do
+    ipaddr=`ifconfig $dev | grep "inet addr:"`
+    echo "ipaddr of $dev:$ipaddr"
+  done
+}
+
+base_information()
+{
+  echo "Hostname:" $HOSTNAME
+  get_network_ip 
+  echo "Release:" `cat /etc/redhat-release`
+  echo "Kernel:" `uname -r`
+  echo "Selinux: "`getenforce`
+  echo "RunLevel:" `runlevel`
+  echo
+}
+

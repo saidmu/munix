@@ -1,0 +1,34 @@
+#!/bin/bash
+
+get_cpu_idle()
+{
+  num=2   #get number of data
+  cpu_idles=`top -d 1 -n $num | grep Cpu | awk '{print $5}' | cut -d "%" -f1`
+  echo " cpu_idles:" $cpu_idles
+  echo "----------------"
+}
+
+get_cpu_iowait()
+{
+  num=2   #get number of data
+  cpu_iowait=`top -d 1 -n $num | grep Cpu | awk '{print $6}' | cut -d "%" -f1`
+  echo " cpu iowait:" $cpu_iowait
+  echo "-----------------"
+}
+
+get_cpu_load()
+{
+  cpu_core=`cat /proc/cpuinfo | grep processor |wc -l`
+  norm=$((cpu_core * cpu_core))
+  cpu_load=`uptime`
+  echo "cpu core*cpu core: " $norm
+  echo "cpu load:" $cpu_load
+}
+
+system_load()
+{
+  get_cpu_idle
+  get_cpu_iowait
+  get_cpu_load
+  echo
+}

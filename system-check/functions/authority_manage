@@ -9,7 +9,7 @@ get_super_user()
 	else
 		echo "---There are $ROOT_COUNT super user ,you need to check carefully---"
 	fi
-
+}
 authority_manage()
 {
 	get_super_user
