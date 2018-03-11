@@ -8,5 +8,4 @@
 ###    
 * python     
 记录日常使用的Python脚本  
-
 ![test](picture/testp.jpg)
