@@ -1,0 +1,23 @@
+#!/bin/bash
+
+get_network_ip()
+{
+  NETWORK_DEV=`cat /proc/net/dev | sed '1,2d' | awk -F ":" '{print $1}'|sed '/virbr0-nic/d'`
+  for DEV in $NETWORK_DEV
+  do
+    IP_INFO=`ifconfig $DEV | sed -n '2p'|awk '{print $2}'`
+    echo "The IP information of $DEV: $IP_INFO"
+  done
+}
+
+base_information()
+{
+  echo "Hostname:" $HOSTNAME
+  get_network_ip 
+  echo "Release:" `cat /etc/redhat-release`
+  echo "Kernel:" `uname -r`
+  echo "Selinux: "`getenforce`
+  echo "RunLevel:" `runlevel`
+  echo
+}
+

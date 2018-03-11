@@ -1,0 +1,20 @@
+#!/bin/bash
+
+gateway_check()
+{
+	network_dev=`cat /proc/net/dev | sed '1,2d'|awk -F: '{print $1}'| head -n 1`
+	i=0
+	for dev in $network_dev
+	do
+		gate_exist=`cat /etc/sysconfig/network-scripts/ifcfg-$dev | grep GATEWAY`
+		if [ ! -z $gate_exist];then
+			gateway=`cat /etc/sysconfig/network-scripts/ifcfg-$dev | grep GATEWAY`
+			echo "$dev: $gateway"
+			let i++
+		fi
+	done
+	if [ "$i" = "0" ];then
+		echo "no gateway"
+	fi
+	echo "default route: "`ip route | grep default`
+}
