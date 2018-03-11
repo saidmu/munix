@@ -7,5 +7,6 @@
 记录日常的学习笔记    
 ###    
 * python     
-记录日常使用的Python脚本
+记录日常使用的Python脚本  
+
 ![test](picture/testp.jpg)
