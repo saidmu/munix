@@ -1,0 +1,11 @@
+name: Check SecretKey
+on: push
+jobs:
+  build:
+    name: CheckSafety
+    runs-on: ubuntu-latest
+    steps:
+      - name: gitleaks-action
+        uses: eshork/gitleaks-action@v1.0.0
+      - name: greetings
+        run: echo "Hellow"
